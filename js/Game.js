@@ -15,10 +15,10 @@
 */
     createPhases(){
         const arrayPhrases = [];
-        const phrase1 = new Phrase('Hello there');
+        const phrase1 = new Phrase('Hello');
         const phrase2 = new Phrase('Luke i am your father');
-        const phrase3 = new Phrase('harry potter');
-        const phrase4 = new Phrase('superman');
+        const phrase3 = new Phrase('harry');
+        const phrase4 = new Phrase('super');
         const phrase5 = new Phrase('donald trump');
         arrayPhrases.push(phrase1,phrase2,phrase3,phrase4,phrase5);
         return arrayPhrases;
@@ -61,7 +61,6 @@ won
 
         const letterList = document.querySelector('#phrase > ul').children;
         let count = 0;
-        let test;
 
         for(let i = 0; i < letterList.length; i++){
 
@@ -70,7 +69,7 @@ won
             };
         };
 
-        if(count == letterList.length){
+        if(count === letterList.length){
             return true;
         } else{
             return false;
@@ -99,11 +98,14 @@ won
     gameOver(gameWon) {
         const h1 = document.querySelector('#game-over-message');
         const overlay = document.querySelector('div#overlay');
+        overlay.style.display = 'flex';
 
-        if(gameWon == true){
+        if(gameWon === true){
+            console.log('true');
             h1.textContent = 'Congratulation! You win!!!';
             overlay.className = 'win'; 
-        } else if (gameWon == false){
+        } else if (gameWon === false){
+            console.log('false');
             h1.textContent = 'You lost, try again';
             overlay.className = 'lose'            
         }
