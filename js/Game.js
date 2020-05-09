@@ -43,8 +43,7 @@
         overlay.style.display = 'none';
 
         // Call getRamdomPhrase 
-        
-        //
+    
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
 
@@ -117,48 +116,22 @@ won
 * @param (HTMLButtonElement) button - The clicked button element
 */
     handleInteraction(button) {
-        if(typeof button == 'object'){
-            button.disabled = true;
-            let letter = button.textContent;
-            if(this.activePhrase.checkLetter(letter) == false){
-                button.classList.add('wrong');
-                this.removeLife();
-            } else if (this.activePhrase.checkLetter(letter) == true){
-                button.classList.add('chosen');
-                this.activePhrase.showMatchedLetter(letter);
-                if(this.checkForWin()){
-                    this.gameOver(true);
-                };
-            };
-        } else {
-            // desactivar el botton que corresponde a la tecla presionada
-            const letter = button;
-            let key;
-            const keys = document.querySelectorAll('button.key');
-            if(letter !== 'Enter'){
 
-                for(let i = 0; i < keys.length; i++){
-                    if(keys[i].textContent == letter){
-                        key = keys[i];
-                    };
-                };
-                if(!key.disabled){
-                    if(this.activePhrase.checkLetter(letter) == false){
-                        key.classList.add('wrong');
-                        this.removeLife();
-                    } else if (this.activePhrase.checkLetter(letter) == true){
-                        key.classList.add('chosen');
-                        this.activePhrase.showMatchedLetter(letter);
-                        if(this.checkForWin()){
-                            this.gameOver(true);
-                        };
-                    };
-                };
-                key.disabled = true;
+        button.disabled = true;
+        let letter = button.textContent;
+        if(this.activePhrase.checkLetter(letter) == false){
+            button.classList.add('wrong');
+            this.removeLife();
+        } else if (this.activePhrase.checkLetter(letter) == true){
+            button.classList.add('chosen');
+            this.activePhrase.showMatchedLetter(letter);
+            if(this.checkForWin()){
+                this.gameOver(true);
             };
         };
-       
     };
+
+    // this method handles the game restart 
 
     restartGame(){
         
@@ -175,8 +148,7 @@ won
             lives[i].setAttribute('src', 'images/liveHeart.png');
         };   
         this.missed = 0;
-        
-    }
+    };
 };
 
  
