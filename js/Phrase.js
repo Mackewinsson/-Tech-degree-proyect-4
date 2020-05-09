@@ -18,8 +18,6 @@ class Phrase{
 
     const splitPhrase = this.phrase
     .split('');
-    // Log splited phrase to console
-    console.log(splitPhrase);
 
     // Forloop to add each item to the DOM
     for(let i = 0; i < splitPhrase.length; i++){
@@ -69,7 +67,6 @@ class Phrase{
       if(element.className == `hide letter ${letter}`){
         element.className = `show letter ${letter}`;
       };
-
     };
 
   };

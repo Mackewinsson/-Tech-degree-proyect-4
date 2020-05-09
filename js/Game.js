@@ -15,10 +15,10 @@
 */
     createPhases(){
         const arrayPhrases = [];
-        const phrase1 = new Phrase('Hello');
+        const phrase1 = new Phrase('Hello there');
         const phrase2 = new Phrase('Luke i am your father');
-        const phrase3 = new Phrase('harry');
-        const phrase4 = new Phrase('super');
+        const phrase3 = new Phrase('harry potter');
+        const phrase4 = new Phrase('super man');
         const phrase5 = new Phrase('donald trump');
         arrayPhrases.push(phrase1,phrase2,phrase3,phrase4,phrase5);
         return arrayPhrases;
@@ -47,7 +47,6 @@
         //
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
-        console.log(this.activePhrase);
 
 
     };
@@ -59,7 +58,7 @@ won
 */
     checkForWin() {
 
-        const letterList = document.querySelector('#phrase > ul').children;
+        const letterList = document.querySelectorAll('#phrase > ul > li.letter');
         let count = 0;
 
         for(let i = 0; i < letterList.length; i++){
@@ -99,17 +98,57 @@ won
         const h1 = document.querySelector('#game-over-message');
         const overlay = document.querySelector('div#overlay');
         overlay.style.display = 'flex';
+        const startButton = document.querySelector('button#btn__reset');
+        startButton.textContent = 'Restart game';
 
         if(gameWon === true){
-            console.log('true');
             h1.textContent = 'Congratulation! You win!!!';
-            overlay.className = 'win'; 
+            overlay.className = 'win';
+            this.restartGame();
         } else if (gameWon === false){
-            console.log('false');
             h1.textContent = 'You lost, try again';
-            overlay.className = 'lose'            
+            overlay.className = 'lose';
+            this.restartGame();         
         }
     };
+
+/**
+* Handles onscreen keyboard button clicks
+* @param (HTMLButtonElement) button - The clicked button element
+*/
+    handleInteraction(button) {
+        button.disabled = true;
+        let letter = button.textContent;
+        if(this.activePhrase.checkLetter(letter) == false){
+            button.classList.add('wrong');
+            this.removeLife();
+        } else if (this.activePhrase.checkLetter(letter) == true){
+            button.classList.add('chosen');
+            this.activePhrase.showMatchedLetter(letter);
+            if(this.checkForWin()){
+                this.gameOver(true);
+            };
+        };
+
+    };
+
+    restartGame(){
+        
+        const phrase = document.querySelector('div#phrase');
+        const ul = phrase.firstElementChild;
+        ul.innerHTML = '';
+        const key = document.querySelectorAll('button.key');
+        for(let i = 0; i < key.length; i++){
+            key[i].className = 'key';
+            key[i].disabled = false;
+        };
+        const lives = document.querySelectorAll('div#scoreboard > ol > li > img');   
+        for(let i = 0; i < lives.length; i++){
+            lives[i].setAttribute('src', 'images/liveHeart.png');
+        };   
+        this.missed = 0;
+        
+    }
 };
 
  

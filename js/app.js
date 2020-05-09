@@ -6,8 +6,17 @@ let game;
 const startButton = document.querySelector('#btn__reset');
 
 startButton.addEventListener('click', (e) =>{
-
     game = new Game();
+    game.startGame(); 
+});
 
-    game.startGame();
+const keyboard = document.querySelector('#qwerty');
+
+keyboard.addEventListener('click', (e)=>{
+
+    if(e.target.tagName == 'BUTTON'){
+    
+        game.handleInteraction(e.target);
+    }
+    
 });
